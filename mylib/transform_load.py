@@ -4,7 +4,7 @@ Transforms and Loads data into the local SQLite3 database
 import sqlite3
 import csv
 
-def load(dataset="data/fifa.csv"):
+def load(dataset="data/wc_forecasts.csv"):
     """Transforms and Loads data into the local SQLite3 database"""
 
     # Load CSV data into a list of tuples
@@ -19,14 +19,14 @@ def load(dataset="data/fifa.csv"):
         if len(row) != 5:
             print(f"Row does not have 5 columns: {row}")
 
-    conn = sqlite3.connect('fifaDB.db')
+    conn = sqlite3.connect('wc_forecastsDB.db')
     c = conn.cursor()
 
     # (Re)Create the table
-    c.execute("DROP TABLE IF EXISTS fifaDB")
+    c.execute("DROP TABLE IF EXISTS wc_forecastsDB")
     c.execute("""
-              CREATE TABLE fifaDB (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+              CREATE TABLE wc_forecastsDB (
+                    team TEXT,
                     country TEXT, 
                     confederation TEXT,
                     population_share REAL,
