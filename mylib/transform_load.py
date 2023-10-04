@@ -1,26 +1,58 @@
 """
 Transforms and Loads data into the local SQLite3 database
-Example:
-,general name,count_products,ingred_FPro,avg_FPro_products,avg_distance_root,ingred_normalization_term,semantic_tree_name,semantic_tree_node
 """
 import sqlite3
 import csv
-import os
 
-#load the csv file and insert into a new sqlite3 database
-def load(dataset="/workspaces/sqlite-lab/data/GroceryDB_IgFPro.csv"):
-    """"Transforms and Loads data into the local SQLite3 database"""
+def load(dataset="data/fifa.csv"):
+    """Transforms and Loads data into the local SQLite3 database"""
 
-    #prints the full working directory and path
-    print(os.getcwd())
-    payload = csv.reader(open(dataset, newline=''), delimiter=',')
-    conn = sqlite3.connect('GroceryDB.db')
+    # Load CSV data into a list of tuples
+    with open(dataset, newline='') as file:
+        reader = csv.reader(file, delimiter=',')
+        next(reader)  # skip header
+        data_list = [tuple(row) for row in reader]
+    
+    # Debugging: Print the first few rows to inspect data
+    for row in data_list[:5]:
+        print(row)
+        if len(row) != 5:
+            print(f"Row does not have 5 columns: {row}")
+
+    conn = sqlite3.connect('fifaDB.db')
     c = conn.cursor()
-    c.execute("DROP TABLE IF EXISTS GroceryDB")
-    c.execute("CREATE TABLE GroceryDB (id,general_name, count_products, ingred_FPro, avg_FPro_products, avg_distance_root, ingred_normalization_term, semantic_tree_name, semantic_tree_node)")
-    #insert
-    c.executemany("INSERT INTO GroceryDB VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)", payload)
-    conn.commit()
-    conn.close()
-    return "GroceryDB.db"
 
+    # (Re)Create the table
+    c.execute("DROP TABLE IF EXISTS fifaDB")
+    c.execute("""
+              CREATE TABLE fifaDB (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    country TEXT, 
+                    confederation TEXT,
+                    population_share REAL,
+                    tv_audience_share REAL,
+                    gdp_weighted_share REAL
+                  )
+              """)
+    
+    # Insert data
+    try:
+        c.executemany("""
+                      INSERT INTO fifaDB (
+                            country, 
+                            confederation,
+                            population_share ,
+                            tv_audience_share ,
+                            gdp_weighted_share
+                          ) 
+                          VALUES (?, ?, ?, ?, ?)
+                      """, data_list)
+    except Exception as e:
+        print(f"Error while inserting data: {e}")
+        conn.rollback()
+    else:
+        conn.commit()
+    finally:
+        conn.close()
+
+    return "fifaDB.db"
