@@ -26,24 +26,24 @@ def load(dataset="data/wc_forecasts.csv"):
     c.execute("DROP TABLE IF EXISTS wc_forecastsDB")
     c.execute("""
               CREATE TABLE wc_forecastsDB (
-                    team TEXT,
-                    country TEXT, 
-                    confederation TEXT,
-                    population_share REAL,
-                    tv_audience_share REAL,
-                    gdp_weighted_share REAL
+              team TEXT,
+              group TEXT,
+              spi REAL,
+              global_o REAL,
+              global_d REAL,
+              sim_wins REAL
                   )
               """)
     
     # Insert data
     try:
         c.executemany("""
-                      INSERT INTO fifaDB (
-                            country, 
-                            confederation,
-                            population_share ,
-                            tv_audience_share ,
-                            gdp_weighted_share
+                      INSERT INTO wc_forecastsDB (
+              group,
+              spi,
+              global_o,
+              global_d,
+              sim_wins
                           ) 
                           VALUES (?, ?, ?, ?, ?)
                       """, data_list)
@@ -55,4 +55,4 @@ def load(dataset="data/wc_forecasts.csv"):
     finally:
         conn.close()
 
-    return "fifaDB.db"
+    return "wc_forecastsDB.db"
