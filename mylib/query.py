@@ -16,75 +16,75 @@ def create_record(
     country, confederation, population_share, tv_audience_share, gdp_weighted_share
 ):
     """create example query"""
-    conn = sqlite3.connect("fifaDB.db")
+    conn = sqlite3.connect("wc_forecastsDB.db")
     c = conn.cursor()
     c.execute(
         """
         INSERT INTO fifaDB 
-        (country, 
-        confederation, 
-        population_share,
-        tv_audience_share, 
-        gdp_weighted_share) 
+        (group, 
+        spi, 
+        global_o,
+        global_d, 
+        sim_wins) 
         VALUES (?, ?, ?, ?, ?)
         """,
-        (country, 
-         confederation, 
-         population_share, 
-         tv_audience_share, 
-         gdp_weighted_share),
+        (group, 
+         spi, 
+         offensive_rating, 
+         defensive_rating, 
+         sim_wins),
     )
     conn.commit()
     conn.close()
 
     log_query(
         f"""INSERT INTO fifaDB VALUES (
-                {country}, 
-                {confederation},
-                {population_share},
-                {tv_audience_share},
-                {gdp_weighted_share});"""
+                {group}, 
+                {spi},
+                {offensive_rating},
+                {defensive_rating},
+                {sim_wins});"""
     )
 
 
 def read_data():
     """read data"""
-    conn = sqlite3.connect("fifaDB.db")
+    conn = sqlite3.connect("wc_forecastsDB.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM fifaDB")
+    c.execute("SELECT * FROM wc_forecastsDB")
     data = c.fetchall()
-    log_query("SELECT * FROM fifaDB;")
+    log_query("SELECT * FROM wc_forecastsDB;")
     return data
 
 
 def update_record(
-            record_id,
-            country, 
-            confederation, 
-            population_share, 
-            tv_audience_share, 
-            gdp_weighted_share
+            team,
+            group, 
+            spi, 
+            offensive_rating, 
+            defensive_rating, 
+            sim_wins
 ):
     """update example query"""
-    conn = sqlite3.connect("fifaDB.db")
+    conn = sqlite3.connect("wc_forecastsDB.db")
     c = conn.cursor()
     c.execute(
         """
         UPDATE fifaDB 
-        SET country=?, 
-        confederation=?, 
-        population_share=?, 
-        tv_audience_share=?, 
-        gdp_weighted_share=?
-        WHERE id=?
+        SET group=?, 
+        spi=?, 
+        offensive_rating=?, 
+        defensive_rating=?, 
+        sim_wins=?
+        WHERE team=?
         """,
         (
-            country, 
-            confederation, 
-            population_share, 
-            tv_audience_share, 
-            gdp_weighted_share,
-            record_id
+            group, 
+            spi, 
+            offensive_rating, 
+            defensive_rating, 
+            sim_wins,
+            team
         ),
     )
     conn.commit()
@@ -92,22 +92,21 @@ def update_record(
 
     log_query(
         f"""UPDATE fifaDB SET 
-        country={country}, 
-        confederation=
-        {confederation},
-        population_share={population_share}, 
-        tv_audience_share={tv_audience_share}, 
-        gdp_weighted_share={gdp_weighted_share},
-        WHERE id={record_id};"""
+        group={group}, 
+        spi={spi},
+        offensive_rating={offensive_rating}, 
+        defensive_rating={defensive_rating}, 
+        sim_wins={sim_wins},
+        WHERE team={team};"""
     )
 
 
 def delete_record(record_id):
     """delete example query"""
-    conn = sqlite3.connect("fifaDB.db")
+    conn = sqlite3.connect("wc_forecastsDB.db")
     c = conn.cursor()
-    c.execute("DELETE FROM fifaDB WHERE id=?", (record_id,))
+    c.execute("DELETE FROM wc_forecastsDB WHERE team=?", (team,))
     conn.commit()
     conn.close()
 
-    log_query(f"DELETE FROM fifaDB WHERE id={record_id};")
+    log_query(f"DELETE FROM wc_forecastsDB WHERE team={team};")
