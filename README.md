@@ -16,14 +16,12 @@ The purpose of this project is to set up a code space to automate interactions b
 ## Check format and test
 Use make test command to test the code
 
-<img width="787" alt="Screen Shot 2023-10-06 at 12 06 33 AM" src="https://github.com/nogibjj/KatherineT.DE.Mini-Project_5/assets/143833511/73c2f277-8c73-4129-b83b-70d3b3504503">
-
-
+<img width="787" alt="Screen Shot 2023-10-06 at 12 06 33 AM" src="https://github.com/nogibjj/KatherineT.DE.Mini-Project_5/assets/143833511/cb510863-78ee-4c48-aaa6-25b79a22e67a">
 
 
 Use make lint and format command to check the format
 
-<img width="662" alt="Screen Shot 2023-10-06 at 12 06 47 AM" src="https://github.com/nogibjj/KatherineT.DE.Mini-Project_5/assets/143833511/df6159af-fc1f-440a-b533-f2fec9ae8bad">
+<img width="662" alt="Screen Shot 2023-10-06 at 12 06 47 AM" src="https://github.com/nogibjj/KatherineT.DE.Mini-Project_5/assets/143833511/57e19067-eb1c-41e4-972c-0f7b3da5fb6a">
 
 
 
