@@ -5,7 +5,7 @@ The purpose of this project is to set up a code space to automate interactions b
 
 ## Preparation
 1. Fork the sqlite-lab.
-2. Choose a dataset, fifa.csv from Github is chosen.
+2. Choose a dataset, fifa.csv from Github is chosen. 
 
 ## Check format and test
 Use make test command to test the code
