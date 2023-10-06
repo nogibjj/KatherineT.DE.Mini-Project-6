@@ -7,6 +7,12 @@ The purpose of this project is to set up a code space to automate interactions b
 1. Fork the sqlite-lab.
 2. Choose a dataset, fifa.csv from Github is chosen. 
 
+## Steps
+1. In my.lib, create four files that perform four functions. Extract.py extract a dataset from a URL. Transform.py cleans,fliters the dataset. Load.py transforms the data into SQLite database. Query.py retrieves from the data and performs update,create, etc.
+2. Create a main.py script to run each step.
+3. Use test_main.py to test each file and step.
+4. Save the process in the log file.
+
 ## Check format and test
 Use make test command to test the code
 
