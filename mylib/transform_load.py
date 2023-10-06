@@ -4,7 +4,7 @@ Transforms and Loads data into the local SQLite3 database
 import sqlite3
 import csv
 
-def load(dataset="data/births/US_births_2000-2014_SSA.csv"):
+def load(dataset="data/fifa.csv"):
     """Transforms and Loads data into the local SQLite3 database"""
 
     # Load CSV data into a list of tuples
@@ -19,31 +19,31 @@ def load(dataset="data/births/US_births_2000-2014_SSA.csv"):
         if len(row) != 5:
             print(f"Row does not have 5 columns: {row}")
 
-    conn = sqlite3.connect('USBirthDB.db')
+    conn = sqlite3.connect('fifaDB.db')
     c = conn.cursor()
 
     # (Re)Create the table
-    c.execute("DROP TABLE IF EXISTS USBirthDB")
+    c.execute("DROP TABLE IF EXISTS fifaDB")
     c.execute("""
-              CREATE TABLE USBirthDB (
+              CREATE TABLE fifaDB (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    year INT, 
-                    month INT,
-                    date_of_month INT,
-                    day_of_week INT,
-                    births INT
+                    country TEXT, 
+                    confederation TEXT,
+                    population_share REAL,
+                    tv_audience_share REAL,
+                    gdp_weighted_share REAL
                   )
               """)
     
     # Insert data
     try:
         c.executemany("""
-                      INSERT INTO USBirthDB (
-                            year, 
-                            month,
-                            date_of_month ,
-                            day_of_week ,
-                            births
+                      INSERT INTO fifaDB (
+                            country, 
+                            confederation,
+                            population_share ,
+                            tv_audience_share ,
+                            gdp_weighted_share
                           ) 
                           VALUES (?, ?, ?, ?, ?)
                       """, data_list)
@@ -55,44 +55,4 @@ def load(dataset="data/births/US_births_2000-2014_SSA.csv"):
     finally:
         conn.close()
 
-    return "USBirthDB.db"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return "fifaDB.db"

@@ -33,18 +33,18 @@ def handle_arguments(args):
 
     if args.action == "update_record":
         parser.add_argument("record_id")
-        parser.add_argument("year")
-        parser.add_argument("month")
-        parser.add_argument("date_of_month")
-        parser.add_argument("day_of_week")
-        parser.add_argument("births")
+        parser.add_argument("country")
+        parser.add_argument("confederation")
+        parser.add_argument("population_share")
+        parser.add_argument("tv_audience_share")
+        parser.add_argument("gdp_weighted_share")
 
     if args.action == "create_record":
-        parser.add_argument("year")
-        parser.add_argument("month")
-        parser.add_argument("date_of_month")
-        parser.add_argument("day_of_week")
-        parser.add_argument("births")
+        parser.add_argument("country")
+        parser.add_argument("confederation")
+        parser.add_argument("population_share")
+        parser.add_argument("tv_audience_share")
+        parser.add_argument("gdp_weighted_share")
 
     if args.action == "delete_record":
         parser.add_argument("record_id", type=int)
@@ -67,11 +67,11 @@ def main():
     elif args.action == "update_record":
         update_record(
             args.record_id,
-            args.year,
-            args.month,
-            args.date_of_month,
-            args.day_of_week,
-            args.births,
+            args.country,
+            args.confederation,
+            args.population_share,
+            args.tv_audience_share,
+            args.gdp_weighted_share,
         )
 
     elif args.action == "delete_record":
@@ -79,11 +79,11 @@ def main():
 
     elif args.action == "create_record":
         create_record(
-            args.year,
-            args.month,
-            args.date_of_month,
-            args.day_of_week,
-            args.births,
+            args.country,
+            args.confederation,
+            args.population_share,
+            args.tv_audience_share,
+            args.gdp_weighted_share,
         )
 
     elif args.action == "read_data":
