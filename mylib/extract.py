@@ -9,9 +9,9 @@ import os
 
 def extract(
     url="""
-    https://github.com/fivethirtyeight/data/blob/master/fifa/fifa_countries_audience.csv
+    https://github.com/fivethirtyeight/data/blob/master/births/US_births_2000-2014_SSA.csv
     """,
-    file_path="data/fifa.csv",
+    file_path="data/births.csv",
     directory="data",
 ):
     """Extract a url to a file path"""

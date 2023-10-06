@@ -12,104 +12,147 @@ def log_query(query):
         file.write(f"```sql\n{query}\n```\n\n")
 
 
-def create_record(
-    country, 
-    confederation, 
-    population_share, 
-    tv_audience_share, 
-    gdp_weighted_share
-):
-    """create example query"""
-    conn = sqlite3.connect("fifaDB.db")
-    c = conn.cursor()
-    c.execute(
-        """
-        INSERT INTO fifaDB 
-        (country, 
-        confederation, 
-        population_share,
-        tv_audience_share, 
-        gdp_weighted_share) 
-        VALUES (?, ?, ?, ?, ?)
-        """,
-        (country, 
-         confederation, 
-         population_share, 
-         tv_audience_share, 
-         gdp_weighted_share),
-    )
-    conn.commit()
+def general_query(query):
+    """runs a query a user inputs"""
+    # Connect to the SQLite database
+    conn = sqlite3.connect("birthDB.db")
+
+    # Create a cursor object to execute SQL queries
+    cursor = conn.cursor()
+
+    # Execute the query
+    cursor.execute(query)
+
+    # If the query modifies the database, commit the changes
+    if (
+        query.strip().lower().startswith("insert")
+        or query.strip().lower().startswith("update")
+        or query.strip().lower().startswith("delete")
+    ):
+        conn.commit()
+
+    # Close the cursor and connection
+    cursor.close()
     conn.close()
 
-    log_query(
-        f"""INSERT INTO fifaDB VALUES (
-                {country}, 
-                {confederation},
-                {population_share},
-                {tv_audience_share},
-                {gdp_weighted_share});"""
-    )
+    log_query(f"{query}")
 
-def update_record(
-            record_id,
-            country, 
-            confederation, 
-            population_share, 
-            tv_audience_share, 
-            gdp_weighted_share
+
+def create_record(
+    year,
+    month,
+    date_of_month,
+    day_of_week,
+    births,
 ):
-    """update example query"""
-    conn = sqlite3.connect("fifaDB.db")
+    """create example query"""
+    conn = sqlite3.connect("birthDB.db")
     c = conn.cursor()
     c.execute(
         """
-        UPDATE fifaDB 
-        SET country=?, 
-        confederation=?, 
-        population_share=?, 
-        tv_audience_share=?, 
-        gdp_weighted_share=?
-        WHERE id=?
+        INSERT INTO birthDB
+        (year, 
+        month, 
+        date_of_month, 
+        day_of_week, 
+        births) 
+        VALUES (?, ?, ?, ?, ?)
         """,
         (
-            country, 
-            confederation, 
-            population_share, 
-            tv_audience_share, 
-            gdp_weighted_share,
-            record_id
+            year,
+            month,
+            date_of_month,
+            day_of_week,
+            births,
         ),
     )
     conn.commit()
     conn.close()
 
+    # Log the query
     log_query(
-        f"""UPDATE fifaDB SET 
-        country={country}, 
-        confederation=
-        {confederation},
-        population_share={population_share}, 
-        tv_audience_share={tv_audience_share}, 
-        gdp_weighted_share={gdp_weighted_share},
+        f"""INSERT INTO AirlineSafetyDB VALUES (
+            {year}, 
+            {month},
+            {date_of_month}, 
+            {day_of_week}, 
+            {births});"""
+    )
+
+
+def update_record(
+    year,
+    month,
+    date_of_month,
+    day_of_week,
+    births,
+    record_id,
+):
+    """update example query"""
+    conn = sqlite3.connect("birthDB.db")
+    c = conn.cursor()
+    print(
+        (
+            year,
+            month,
+            date_of_month,
+            day_of_week,
+            births,
+            record_id,
+        )
+    )
+    c.execute(
+        """
+        UPDATE birthDB 
+        SET year=?,
+        month=?, 
+        date_of_month=?, 
+        day_of_week=?, 
+        births=?
+        WHERE id=?;
+        """,
+        (
+            year,
+            month,
+            date_of_month,
+            day_of_week,
+            births,
+            record_id,
+        ),
+    )
+
+    conn.commit()
+    conn.close()
+
+    # Log the query
+    log_query(
+        f"""UPDATE AirlineSafetyDB SET 
+        year={year}, 
+        month={month},
+        date_of_month={date_of_month},
+        day_of_week={day_of_week}, 
+        births={births}
         WHERE id={record_id};"""
     )
 
 
-def read_data():
-    """read data"""
-    conn = sqlite3.connect("fifaDB.db")
-    c = conn.cursor()
-    c.execute("SELECT * FROM fifaDB")
-    data = c.fetchall()
-    log_query("SELECT * FROM fifaDB;")
-    return data
-
 def delete_record(record_id):
     """delete example query"""
-    conn = sqlite3.connect("fifaDB.db")
+    conn = sqlite3.connect("birthDB.db")
     c = conn.cursor()
-    c.execute("DELETE FROM fifaDB WHERE id=?", (record_id,))
+    c.execute("DELETE FROM birthDB WHERE id=?", (record_id,))
     conn.commit()
     conn.close()
 
-    log_query(f"DELETE FROM fifaDB WHERE id={record_id};")
+    # Log the query
+    log_query(f"DELETE FROM birthDB WHERE id={record_id};")
+
+
+def read_data():
+    """read data"""
+    conn = sqlite3.connect("birthDB.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM birthDB")
+    data = c.fetchall()
+    log_query("SELECT * FROM birthDB;")
+    return data
