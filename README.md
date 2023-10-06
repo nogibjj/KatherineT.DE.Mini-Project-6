@@ -1,4 +1,4 @@
-### Data Engineering Mini Project 5
+# Data Engineering Mini Project 5
 
 ## Purpose
 The purpose of this project is to set up a code space to automate interactions between Python and SQL Database. 
