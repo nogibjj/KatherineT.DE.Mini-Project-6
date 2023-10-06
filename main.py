@@ -30,23 +30,24 @@ def handle_arguments(args):
 
     args = parser.parse_args(args[:1])
     print(args.action)
+
     if args.action == "update_record":
-        parser.add_argument("team")
-        parser.add_argument("group")
-        parser.add_argument("spi")
-        parser.add_argument("global_o")
-        parser.add_argument("global_d")
-        parser.add_argument("sim_wins")
+        parser.add_argument("record_id")
+        parser.add_argument("year")
+        parser.add_argument("month")
+        parser.add_argument("date_of_month")
+        parser.add_argument("day_of_week")
+        parser.add_argument("births")
 
     if args.action == "create_record":
-        parser.add_argument("group")
-        parser.add_argument("spi")
-        parser.add_argument("global_o")
-        parser.add_argument("global_d")
-        parser.add_argument("sim_wins")
+        parser.add_argument("year")
+        parser.add_argument("month")
+        parser.add_argument("date_of_month")
+        parser.add_argument("day_of_week")
+        parser.add_argument("births")
 
     if args.action == "delete_record":
-        parser.add_argument("team", type=TEXT)
+        parser.add_argument("record_id", type=int)
 
     return parser.parse_args(sys.argv[1:])
 
@@ -65,24 +66,24 @@ def main():
 
     elif args.action == "update_record":
         update_record(
-            args.team,
-            args.group,
-            args.spi,
-            args.global_o,
-            args.global_d,
-            args.sim_wins,
+            args.record_id,
+            args.year,
+            args.month,
+            args.date_of_month,
+            args.day_of_week,
+            args.births,
         )
 
     elif args.action == "delete_record":
-        delete_record(args.team)
+        delete_record(args.record_id)
 
     elif args.action == "create_record":
         create_record(
-            args.group,
-            args.spi,
-            args.global_o,
-            args.global_d,
-            args.sim_wins,
+            args.year,
+            args.month,
+            args.date_of_month,
+            args.day_of_week,
+            args.births,
         )
 
     elif args.action == "read_data":

@@ -13,100 +13,101 @@ def log_query(query):
 
 
 def create_record(
-    country, confederation, population_share, tv_audience_share, gdp_weighted_share
+    year, month, date_of_month, day_of_week, births
 ):
     """create example query"""
-    conn = sqlite3.connect("wc_forecastsDB.db")
+    conn = sqlite3.connect("USBirthDB.db")
     c = conn.cursor()
     c.execute(
         """
-        INSERT INTO fifaDB 
-        (group, 
-        spi, 
-        global_o,
-        global_d, 
-        sim_wins) 
+        INSERT INTO USBirthDB 
+        (year, 
+        month, 
+        date_of_month,
+        day_of_week, 
+        births) 
         VALUES (?, ?, ?, ?, ?)
         """,
-        (group, 
-         spi, 
-         offensive_rating, 
-         defensive_rating, 
-         sim_wins),
+        (year, 
+         month, 
+         date_of_month, 
+         day_of_week, 
+         births),
     )
     conn.commit()
     conn.close()
 
     log_query(
         f"""INSERT INTO fifaDB VALUES (
-                {group}, 
-                {spi},
-                {offensive_rating},
-                {defensive_rating},
-                {sim_wins});"""
+                {year}, 
+                {month},
+                {date_of_month},
+                {day_of_week},
+                {births});"""
     )
 
 
 def read_data():
     """read data"""
-    conn = sqlite3.connect("wc_forecastsDB.db")
+    conn = sqlite3.connect("USBirthDB.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM wc_forecastsDB")
+    c.execute("SELECT * FROM USBirthDB")
     data = c.fetchall()
-    log_query("SELECT * FROM wc_forecastsDB;")
+    log_query("SELECT * FROM USBirthDB;")
     return data
 
 
 def update_record(
-            team,
-            group, 
-            spi, 
-            offensive_rating, 
-            defensive_rating, 
-            sim_wins
+            record_id,
+            year, 
+            month, 
+            date_of_month, 
+            day_of_week, 
+            births
 ):
     """update example query"""
-    conn = sqlite3.connect("wc_forecastsDB.db")
+    conn = sqlite3.connect("USBirthDB.db")
     c = conn.cursor()
     c.execute(
         """
-        UPDATE fifaDB 
-        SET group=?, 
-        spi=?, 
-        offensive_rating=?, 
-        defensive_rating=?, 
-        sim_wins=?
-        WHERE team=?
+        UPDATE USBirthDB 
+        SET year=?, 
+        month=?, 
+        date_of_month=?, 
+        day_of_week=?, 
+        births=?
+        WHERE id=?
         """,
         (
-            group, 
-            spi, 
-            offensive_rating, 
-            defensive_rating, 
-            sim_wins,
-            team
+            year, 
+            month, 
+            date_of_month, 
+            day_of_week, 
+            births,
+            record_id
         ),
     )
     conn.commit()
     conn.close()
 
     log_query(
-        f"""UPDATE fifaDB SET 
-        group={group}, 
-        spi={spi},
-        offensive_rating={offensive_rating}, 
-        defensive_rating={defensive_rating}, 
-        sim_wins={sim_wins},
-        WHERE team={team};"""
+        f"""UPDATE USBirthDB SET 
+        year={year}, 
+        month=
+        {month},
+        date_of_month={date_of_month}, 
+        day_of_week={day_of_week}, 
+        births={births},
+        WHERE id={record_id};"""
     )
 
 
 def delete_record(record_id):
     """delete example query"""
-    conn = sqlite3.connect("wc_forecastsDB.db")
+    conn = sqlite3.connect("USBirthDB.db")
     c = conn.cursor()
-    c.execute("DELETE FROM wc_forecastsDB WHERE team=?", (team,))
+    c.execute("DELETE FROM USBirthDB WHERE id=?", (record_id,))
     conn.commit()
     conn.close()
 
-    log_query(f"DELETE FROM wc_forecastsDB WHERE team={team};")
+    log_query(f"DELETE FROM USBirthDB WHERE id={record_id};")

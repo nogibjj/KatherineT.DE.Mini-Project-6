@@ -46,13 +46,4 @@ transform_load:
 	python main.py transform_load
 
 query:
-	# using delete query as an example
-	python main.py delete_record 10
-
-
-
-
-
-
-
-
+	python main.py general_query "SELECT * FROM AirlineSafetyDB WHERE airline='Alaska Airlines';"
