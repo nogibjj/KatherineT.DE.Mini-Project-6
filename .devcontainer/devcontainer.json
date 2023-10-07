@@ -79,20 +79,3 @@
 	//"postCreateCommand": "oryx build -p virtualenv_name=.venv --log-file /tmp/oryx-build.log --manifest-dir /tmp || echo 'Could not auto-build. Skipping.'"
 	 "postCreateCommand": "bash setup.sh"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
