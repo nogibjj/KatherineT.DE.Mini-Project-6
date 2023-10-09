@@ -17,15 +17,17 @@ def test_extract():
     assert result.returncode == 0
     assert "Extracting data..." in result.stdout
 
-def test_delete_record():
-    """tests delete_record"""
+
+def test_transform_load():
+    """tests transfrom_load"""
     result = subprocess.run(
-        ["python", "main.py", "delete_record", "1"],
+        ["python", "main.py", "transform_load"],
         capture_output=True,
         text=True,
         check=True,
     )
     assert result.returncode == 0
+    assert "Transforming data..." in result.stdout
 
 
 def test_general_query():
@@ -35,19 +37,14 @@ def test_general_query():
             "python",
             "main.py",
             "general_query",
-            "SELECT * FROM birthDB WHERE year = 2000",
+            """SELECT t1.year,
+                SUM(t1.births) as annual_births,
+            FROM default.births2000db t1
+            JOIN default.births1994db t2 ON t1.year = t2.year and t1.month=t2.month
+            GROUP BY t1.year
+            ORDER BY annual_births
+            LIMIT 10""",
         ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    assert result.returncode == 0
-
-
-def test_read_data():
-    """tests read_data"""
-    result = subprocess.run(
-        ["python", "main.py", "read_data"],
         capture_output=True,
         text=True,
         check=True,
@@ -57,6 +54,5 @@ def test_read_data():
 
 if __name__ == "__main__":
     test_extract()
-    test_read_data()
-    test_delete_record()
+    test_transform_load()
     test_general_query()
