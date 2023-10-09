@@ -23,15 +23,15 @@ def load(dataset="data/births2000.csv", dataset2="data/births1994.csv"):
     ) as connection:
         c = connection.cursor()
         # INSERT TAKES TOO LONG
-        # c.execute("DROP TABLE IF EXISTS births2000")
-        c.execute("SHOW TABLES FROM default LIKE 'year*'")
+        # c.execute("DROP TABLE IF EXISTS births2000DB")
+        c.execute("SHOW TABLES FROM default LIKE 'births2000*'")
         result = c.fetchall()
         # takes too long so not dropping anymore
-        # c.execute("DROP TABLE IF EXISTS births1994")
+        # c.execute("DROP TABLE IF EXISTS EventTimesDB")
         if not result:
             c.execute(
                 """
-                CREATE TABLE IF NOT EXISTS births2000 (
+                CREATE TABLE IF NOT EXISTS births2000DB (
                     id int,
                     year int,
                     month int,
@@ -45,7 +45,7 @@ def load(dataset="data/births2000.csv", dataset2="data/births1994.csv"):
             for _, row in df.iterrows():
                 convert = (_,) + tuple(row)
                 c.execute(f"INSERT INTO births2000DB VALUES {convert}")
-        c.execute("SHOW TABLES FROM default LIKE 'year*'")
+        c.execute("SHOW TABLES FROM default LIKE 'births1994*'")
         result = c.fetchall()
         # c.execute("DROP TABLE IF EXISTS births1994DB")
         if not result:
@@ -53,11 +53,10 @@ def load(dataset="data/births2000.csv", dataset2="data/births1994.csv"):
                 """
                 CREATE TABLE IF NOT EXISTS births1994DB (
                     id int,
-                    year int,
-                    month int,
-                    date_of_month int,
-                    day_of_week int,
-                    births
+                    tournament string,
+                    surface string,
+                    seconds_added_per_point string,
+                    years string
                 )
                 """
             )

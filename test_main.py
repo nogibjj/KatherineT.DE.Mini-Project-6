@@ -37,13 +37,9 @@ def test_general_query():
             "python",
             "main.py",
             "general_query",
-            """SELECT t1.year,
-                SUM(t1.births) as annual_births,
-            FROM default.births2000db t1
-            JOIN default.births1994db t2 ON t1.year = t2.year and t1.month=t2.month
-            GROUP BY t1.year
-            ORDER BY annual_births
-            LIMIT 10""",
+            """SELECT year, SUM(births) 
+            FROM default.births2000DB 
+            GROUP BY year;""",
         ],
         capture_output=True,
         text=True,
