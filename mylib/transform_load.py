@@ -27,7 +27,7 @@ def load(dataset="data/births2000.csv", dataset2="data/births1994.csv"):
         c.execute("SHOW TABLES FROM default LIKE 'births2000*'")
         result = c.fetchall()
         # takes too long so not dropping anymore
-        # c.execute("DROP TABLE IF EXISTS EventTimesDB")
+        # c.execute("DROP TABLE IF EXISTS births1994DB")
         if not result:
             c.execute(
                 """
@@ -53,10 +53,11 @@ def load(dataset="data/births2000.csv", dataset2="data/births1994.csv"):
                 """
                 CREATE TABLE IF NOT EXISTS births1994DB (
                     id int,
-                    tournament string,
-                    surface string,
-                    seconds_added_per_point string,
-                    years string
+                    year int,
+                    month int,
+                    date_of_month int,
+                    day_of_week int,
+                    births int
                 )
                 """
             )

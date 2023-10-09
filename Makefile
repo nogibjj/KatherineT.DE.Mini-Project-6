@@ -42,3 +42,5 @@ extract:
 transform_load: 
 	python main.py transform_load
 
+query:
+	python main.py general_query "SELECT year FROM default.births2000DB"
