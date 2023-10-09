@@ -71,7 +71,7 @@ def create_record(
 
     # Log the query
     log_query(
-        f"""INSERT INTO AirlineSafetyDB VALUES (
+        f"""INSERT INTO birthDB VALUES (
             {year}, 
             {month},
             {date_of_month}, 
@@ -126,7 +126,7 @@ def update_record(
 
     # Log the query
     log_query(
-        f"""UPDATE AirlineSafetyDB SET 
+        f"""UPDATE birthDB SET 
         year={year}, 
         month={month},
         date_of_month={date_of_month},
