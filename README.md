@@ -32,7 +32,6 @@ Use make lint and format command to check the format
 
 <img width="739" alt="Screen Shot 2023-10-09 at 6 36 18 PM" src="https://github.com/nogibjj/KatherineT.DE.Mini-Project-6/assets/143833511/f6e8dabf-29b2-4b17-aaca-4e8243e1af0d">
 
-## Architecture
 
 
 
