@@ -115,3 +115,35 @@ SELECT month, SUM(births)
 [Row(month=1, sum(births)=328656), Row(month=2, sum(births)=324046), Row(month=3, sum(births)=347824), Row(month=4, sum(births)=117421)]
 ```
 
+```sql
+SELECT year FROM default.births2000DB
+```
+
+```response from databricks
+[Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000), Row(year=2000)]
+```
+
+```sql
+SELECT month, SUM(births)
+            FROM default.births2000DB
+            GROUP BY month
+            ORDER BY month
+            
+```
+
+```response from databricks
+[Row(month=1, sum(births)=328656), Row(month=2, sum(births)=324046), Row(month=3, sum(births)=347824), Row(month=4, sum(births)=117421)]
+```
+
+```sql
+SELECT month, SUM(births)
+            FROM default.births2000DB
+            GROUP BY month
+            ORDER BY month
+            
+```
+
+```response from databricks
+[Row(month=1, sum(births)=328656), Row(month=2, sum(births)=324046), Row(month=3, sum(births)=347824), Row(month=4, sum(births)=117421)]
+```
+
