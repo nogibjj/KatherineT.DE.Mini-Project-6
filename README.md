@@ -13,6 +13,15 @@ This project is aimed to create an ETL-Query pipeline with an external cloud dat
 3. Use test_main.py to test each file and step.
 4. Save the process in the log file.
 
+## Complex Query
+The query retrieves data from births table and groups by month, returns each month's total births and sort by month. 
+
+```
+SELECT month, SUM(births)
+            FROM default.births2000DB
+            GROUP BY month
+            ORDER BY month
+```
 ## Check format and test
 Use make test command to test the code
 
