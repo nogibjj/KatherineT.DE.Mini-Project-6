@@ -21,6 +21,7 @@ SELECT month, SUM(births)
             FROM default.births2000DB
             GROUP BY month
             ORDER BY month
+            LIMIT 10
 ```
 ## Check format and test
 Use make test command to test the code
