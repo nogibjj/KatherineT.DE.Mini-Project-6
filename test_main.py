@@ -41,6 +41,7 @@ def test_general_query():
             FROM default.births2000DB
             GROUP BY month
             ORDER BY month
+            LIMIT 10
             """,
         ],
         capture_output=True,
