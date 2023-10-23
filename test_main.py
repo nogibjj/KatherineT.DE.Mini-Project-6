@@ -37,10 +37,11 @@ def test_general_query():
             "python",
             "main.py",
             "general_query",
-            """SELECT month, SUM(births)
-            FROM default.births2000DB
-            GROUP BY month
-            ORDER BY month
+            """SELECT t1.month, t1.SUM(births)
+            FROM default.births2000DB t1 JOIN default.births1994DB t2
+            ON t1.year=t2.year
+            GROUP BY t1.month
+            ORDER BY t1.month
             LIMIT 10
             """,
         ],
