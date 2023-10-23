@@ -14,13 +14,14 @@ This project is aimed to create an ETL-Query pipeline with an external cloud dat
 4. Save the process in the log file.
 
 ## Complex Query
-The query retrieves data from births table and groups by month, returns each month's total births and sort by month. 
+The query retrieves data from two births table, joins on the same year, and groups by month, returns each month's total births and sort by month. 
 
 ```
-SELECT month, SUM(births)
-            FROM default.births2000DB
-            GROUP BY month
-            ORDER BY month
+SELECT t1.month, t1.SUM(births)
+            FROM default.births2000DB t1 JOIN default.births1994DB t2
+            ON t1.year=t2.year
+            GROUP BY t1.month
+            ORDER BY t1.month
             LIMIT 10
 ```
 ## Check format and test
